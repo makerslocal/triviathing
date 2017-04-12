@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trivia Thing</title>
+	<link rel="stylesheet" href="style.css">
+	<script>
+		setInterval(function() {
+			fetch('/teams').then(function(response) {
+				return response.json();
+			}).then(function(json) {
+				console.log(json);
+
+				let teamsEl = document.getElementById("teams");
+				while ( teamsEl.firstChild ) {
+					teamsEl.removeChild(teamsEl.firstChild);
+				}
+
+				for ( let i=0; i<json.length; i++ ) {
+					let el = document.createElement("li");
+					if ( json[i].emphasis ) {
+						el.classList = 'emphasis';
+					}
+					el.innerHTML = json[i].name + " - " + json[i].score;
+					teamsEl.appendChild(el);
+				}
+
+			});
+
+			fetch('/stuff').then(function(response) {
+				return response.json();
+			}).then(function(json) {
+				console.log(json);
+
+				document.getElementById("question").innerHTML = json.question;
+				document.getElementById("answer").innerHTML = json.answer;
+			});
+		}, 1000);
+	</script>
+</head>
+<body>
+	<div id="question">question</div>
+	<div id="answer">answer</div>
+	<ol id="teams">
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+		<li>teams</li>
+	</ol>
+</body>
+</html>

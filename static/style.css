@@ -1,0 +1,23 @@
+body {
+	display:flex;
+	flex-direction:column;
+	height:100vh;
+	margin:0;
+	font-family:sans-serif;
+	font-size:36px;
+}
+body * {
+	margin:auto auto;
+	text-align:center;
+}
+#answer {
+	font-size:2em;
+}
+#teams * {
+	font-size:0.8em;
+	text-align:left;
+}
+#teams .emphasis {
+	font-weight:bold;
+}
+
