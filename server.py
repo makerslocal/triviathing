@@ -5,12 +5,25 @@ from __future__ import print_function
 from flask import Flask, jsonify, redirect, request
 import json
 
-title_text = "Hello!"
-subtitle_text = "Thanks for coming!"
+question_text = "Thanks for coming!"
+answer_text = "Hello!"
 teams = []
 
 
 app = Flask(__name__)
+
+@app.route('/stuff', methods=['GET'])
+def get_stuff():
+	return json.dumps({'question':question_text, 'answer':answer_text})
+@app.route('/stuff', methods=['PUT', 'POST'])
+def set_stuff():
+	global question_text, answer_text
+	if 'question' in request.form:
+		question_text = request.form['question']
+	if 'answer' in request.form:
+		answer_text = request.form['answer']
+	return redirect("/static/admin.html")
+
 
 @app.route('/teams', methods=['GET'])
 def get_teams():
@@ -22,7 +35,8 @@ def create_team():
 		'emphasis': True,
 		'score': 0
 	})
-	return json.dumps(len(teams)-1)
+	return redirect("/static/admin.html")
+	#return json.dumps(len(teams)-1)
 
 @app.route('/teams/<id>', methods=['GET'])
 def get_team(id):
@@ -38,5 +52,5 @@ def set_team(id):
 
 if __name__ == '__main__':
 	print("Running")
-	app.run(host='0.0.0.0', port=6666, debug=True)
+	app.run(host='0.0.0.0', port=7777, debug=True)
 
