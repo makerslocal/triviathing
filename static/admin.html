@@ -1,5 +1,47 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title>Trivia Admin</title>
+	<script>
+		setInterval(function() {
+                        fetch('/teams').then(function(response) {
+                                return response.json();
+                        }).then(function(json) {
+                                console.log(json);
+
+                                let teamsEl = document.getElementById("teams");
+                                while ( teamsEl.firstChild ) {
+                                        teamsEl.removeChild(teamsEl.firstChild);
+                                }
+
+                                for ( let i=0; i<json.length; i++ ) {
+                                        let el = document.createElement("button");
+                                        if ( json[i].emphasis ) {
+                                                el.classList = 'emphasis';
+                                        }
+                                        el.innerHTML = json[i].name + " - " + json[i].score;
+					el.dataset.id = i;
+					el.addEventListener("click", function() {
+						console.log(this);
+						let fd = new FormData();
+						fd.set('emphasis', (!(this.classList.length > 0)));
+						fetch('/teams/' + this.dataset.id, {
+							method: 'post',
+							body: fd
+						});
+					});
+                                        teamsEl.appendChild(el);
+                                }
+
+                        });
+		}, 1000);
+	</script>
+	<style>
+		.emphasis {
+			font-weight:bold;
+		}
+	</style>
+</head>
 <body>
 	<form method="POST" action="/stuff">
 		<input name="question" placeholder="Question">
@@ -9,6 +51,8 @@
 	<form method="POST" action="/teams">
 		<input name="name" placeholder="Name">
 		<button type="submit">Add team</button>
-	<form>
+	</form>
+	<div id="teams"></div>
+	
 </body>
 </html>
