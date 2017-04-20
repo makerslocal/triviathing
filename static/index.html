@@ -33,6 +33,16 @@
 
 				document.getElementById("question").innerHTML = json.question;
 				document.getElementById("answer").innerHTML = json.answer;
+
+				document.getElementById("question").style.display = "block";
+				document.getElementById("answer").style.display = "block";
+				if ( json.question == "" ) {
+					document.getElementById("question").style.display = "none";
+				}
+				if ( json.answer == "" ) {
+					document.getElementById("answer").style.display = "none";
+				}
+					
 			});
 		}, 1000);
 	</script>
