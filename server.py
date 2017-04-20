@@ -52,6 +52,16 @@ def set_team(id):
 		print("Set emphasis to:", teams[id]['emphasis'])
 	return json.dumps(teams[id])
 
+@app.route('/scores', methods=['POST', 'PUT'])
+def add_to_scores():
+	global teams
+	for team in teams:
+		if team['emphasis']:
+			team['score'] += int(request.form['amount'])
+	#return json.dumps(teams)
+	return redirect("/static/admin.html")
+
+
 if __name__ == '__main__':
 	print("Running")
 	app.run(host='0.0.0.0', port=7777, debug=True)
