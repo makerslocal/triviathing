@@ -19,6 +19,7 @@ body * {
 #teams li {
 	font-size:0.8em;
 	text-align:left;
+	list-style-type: none;
 }
 #teams .emphasis {
 	font-weight:bold;
