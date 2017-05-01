@@ -7,6 +7,7 @@ body {
 	font-size:36px;
 	background-color: #eeeff1;
 	color: #1c2b60;
+	overflow:hidden;
 }
 body * {
 	margin:auto auto;
@@ -22,4 +23,15 @@ body * {
 #teams .emphasis {
 	font-weight:bold;
 }
-
+#logos {
+	width:100%;
+	text-align:left;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	margin:12.5px;
+}
+#logos * {
+	height:125px;
+	width:auto;
+}
